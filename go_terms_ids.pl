@@ -14,11 +14,11 @@ my $outfile = "";
 
 # get rid of old temporary file if there is one
 
-if (-e "Terms_IDs")  { unlink "Terms_IDs" }
+if (-e "Terms_IDs.txt")  { unlink "Terms_IDs.txt" }
 
 # open up new temporary holding file and actual file
 
-open (TEMP, ">>Terms_IDs") or die "can't open temporary holding file \n";
+open (TEMP, ">>Terms_IDs.txt") or die "can't open temporary holding file \n";
 
 # read in path to OBO format file
 #  (for my use, provided as argument passed by cronjob)
@@ -85,7 +85,7 @@ print OUT "!\n";
 
 # sort the terms & IDs and plunk into the real file
 
-system ("sort Terms_IDs >> $outfile");
+system ("sort Terms_IDs.txt >> $outfile");
 
 # now the tricky part : cvs commit!!
 #  must change to ssh eventually - can do so once keys are set up
