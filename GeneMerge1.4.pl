@@ -765,7 +765,7 @@ if ($abort eq "FALSE") {
 	# Go through the array and parse out all gene names that contribute
 	# to this GMRG term (could be one or more)
 	for ($x=7;$x<$arraylength;$x++) {				##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============
-	    $genenames = $genenames . "$FinalData[$x], "; #########=======  el tabulador es el que se agrega después de cada ID, entonces hay que cambiarlo a que sea una comma.
+	    $genenames = $genenames . "/$FinalData[$x]/, "; #########=======  el tabulador es el que se agrega después de cada ID, entonces hay que cambiarlo a que sea una comma.
 	}        									##>>>>>>>============ ##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============
 	# get function for this term from Ontology hash
 	if ($this_function = $Ontology_Hash{$GMRG_Term}) {
@@ -1067,7 +1067,7 @@ if ($abort eq "FALSE") {
 					#  category,  ID,   term,   adj_pval
 
 
-    print FINAL "\"category\",\"ID\",\"Pop_freq\",\"Pop_frac\",\"Study_frac\",\"P\",\"adj_pval\",\"FDR_10\",\"FDR_5\",\"FDR_1\",\"$custom_FDR_header\",\"term\",\"genes\"\n";
+    print FINAL "\"Aspect\",\"GO\",\"Pop_freq\",\"Pop_frac\",\"Study_frac\",\"P\",\"adj_pval\",\"FDR_10\",\"FDR_5\",\"FDR_1\",\"$custom_FDR_header\",\"Term\",\"Entry\"\n";
 
 #"Aspect\tGO\tPop_freq\tPop_frac\tStudy_frac\tP\tBonf_Cor_P\tFDR_10\tFDR_5\tFDR_1\t$custom_FDR_header\tTerm\tqacc\n";
 
