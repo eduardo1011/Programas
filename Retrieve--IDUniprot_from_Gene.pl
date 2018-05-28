@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 ######################################################################
-##### script of UNIPROT for download fasta file from gene list  ######
+##### script of UNIPROT for download ID ACC from gene list      ######
 ######################################################################
 
 
