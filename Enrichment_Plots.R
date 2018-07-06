@@ -604,6 +604,12 @@ max(ups$log.Pval[1:total.terms]) + 5
 #  annotate("pointrange", x = length(ups$log.Pval[1:total.terms]), y =  min(ups$log.Pval[1:total.terms])+2.3, ymin = 0, ymax = 0,
 #           colour = "black", size = .5)
 #
+# 
+if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.terms]) <= 9)) {
+  text.annotate.size=3
+} else if (length(nodes$Entry[1:total.terms]) >= 9.1) {
+  text.annotate.size=2
+}
 # Function for bar plot
 myplot2 <- function(mydata, term, log.Pval) {
   plot <- (ggplot(ups) +
@@ -624,7 +630,7 @@ myplot2 <- function(mydata, term, log.Pval) {
              scale_x_discrete("",limit=nodes$Entry[1:total.terms])+
              annotate("text", x = length(ups$log.Pval[1:total.terms])-1, 
                       y = min(ups$log.Pval[1]),
-                      label = 'bold("P = 0.05 (-log10)")',colour = "black", size = 3, parse = TRUE)+
+                      label = 'bold("P = 0.05 (-log10)")',colour = "black", size = text.annotate.size, parse = TRUE)+
              annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])-1.5, ymin = 0, ymax = 0,
                       colour = "blue4", size = .3))
 }
@@ -701,6 +707,11 @@ if (colnames(nodes[,2]) == "Exp") {
   }
   #
   #
+if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.terms]) <= 9)) {
+  text.annotate.size=3
+} else if (length(nodes$Entry[1:total.terms]) >= 9.1) {
+  text.annotate.size=2
+}
   # Bar plot with P value
   # Function for bar plot
   myplot2 <- function(mydata, term, log.Pval) {
@@ -722,7 +733,7 @@ if (colnames(nodes[,2]) == "Exp") {
                scale_x_discrete("",limit=nodes$Entry[1:total.terms])+
                annotate("text", x = length(ups$log.Pval[1:total.terms])-1, 
                         y = min(ups$log.Pval[1]),
-                        label = 'bold("P = 0.05 (-log10)")',colour = "black", size = 3, parse = TRUE)+
+                        label = 'bold("P = 0.05 (-log10)")',colour = "black", size = text.annotate.size, parse = TRUE)+
                annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])-1.5, ymin = 0, ymax = 0,
                         colour = "blue4", size = .5))
   }
