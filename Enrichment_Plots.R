@@ -610,7 +610,7 @@ myplot2 <- function(mydata, term, log.Pval) {
              geom_bar(aes(x = term, weight = log.Pval),fill="darkgoldenrod2") +
              geom_line(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),color = "blue4", size = .3 )+
              geom_point(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),
-                        position = position_dodge(0.3),color = "blue4", size = 2)+
+                        position = position_dodge(0.3),color = "blue4", size = 1.5)+
              theme(axis.text.x = element_text(face="bold",size=8, angle=90),
                    axis.text.y = element_text(face="bold",size=8),
                    axis.title.y = element_text(size=11,face="bold"),
@@ -622,10 +622,10 @@ myplot2 <- function(mydata, term, log.Pval) {
              scale_y_continuous("-log10(P-value)",limit = c(0,round(max(ups$log.Pval[0:total.terms]+2))),
                                 breaks=seq(0,round(max(ups$log.Pval[0:total.terms]+3),digits = 0),3)) +
              scale_x_discrete("",limit=nodes$Entry[1:total.terms])+
-             annotate("text", x = length(ups$log.Pval[1:total.terms]), 
-                      y = min(ups$log.Pval[1:total.terms])+3,
+             annotate("text", x = length(ups$log.Pval[1:total.terms])-1, 
+                      y = min(ups$log.Pval[1])+2,
                       label = 'bold("P = 0.05 (-log10)")',colour = "black", size = 3, parse = TRUE)+
-             annotate("pointrange", x = length(ups$log.Pval[1:total.terms]), y =  min(ups$log.Pval[1:total.terms])+2, ymin = 0, ymax = 0,
+             annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])+.5, ymin = 0, ymax = 0,
                       colour = "blue4", size = .3))
 }
 #
@@ -706,9 +706,9 @@ if (colnames(nodes[,2]) == "Exp") {
   myplot2 <- function(mydata, term, log.Pval) {
     plot <- (ggplot(ups) +
                geom_bar(aes(x = term, weight = log.Pval),fill="darkgoldenrod2") +
-               geom_line(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),color = "blue4", size = .5 )+
+               geom_line(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),color = "blue4", size = .3 )+
                geom_point(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),
-                          position = position_dodge(0.3),color = "blue4", size = 3)+
+                          position = position_dodge(0.3),color = "blue4", size = 1.5)+
                theme(axis.text.x = element_text(face="bold",size=8, angle=90),
                      axis.text.y = element_text(face="bold",size=8),
                      axis.title.y = element_text(size=11,face="bold"),
@@ -720,10 +720,10 @@ if (colnames(nodes[,2]) == "Exp") {
                scale_y_continuous("-log10(P-value)",limit = c(0,round(max(ups$log.Pval[0:total.terms]+2))),
                                   breaks=seq(0,round(max(ups$log.Pval[0:total.terms]+3),digits = 0),3)) +
                scale_x_discrete("",limit=nodes$Entry[1:total.terms])+
-               annotate("text", x = length(ups$log.Pval[1:total.terms]), 
-                        y = min(ups$log.Pval[1:total.terms])+3,
+               annotate("text", x = length(ups$log.Pval[1:total.terms])-1, 
+                        y = min(ups$log.Pval[1])+2,
                         label = 'bold("P = 0.05 (-log10)")',colour = "black", size = 3, parse = TRUE)+
-               annotate("pointrange", x = length(ups$log.Pval[1:total.terms]), y =  min(ups$log.Pval[1:total.terms])+2, ymin = 0, ymax = 0,
+               annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])+.5, ymin = 0, ymax = 0,
                         colour = "blue4", size = .5))
   }
   #
