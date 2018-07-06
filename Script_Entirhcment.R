@@ -1,27 +1,4 @@
 #
-# Libraries
-#
-library(tidyverse)
-library(tidygraph)
-library(viridis)
-library(ggraph)
-library(circlize)
-library(RColorBrewer)
-library(igraph)
-library(cowplot)
-library(grid)
-library(networkD3)
-library(UpSetR)
-#
-setwd("/home/lalo/Documentos/API")
-#
-# Open nodes file
-nodes = read_csv("Nodes_KEGG_Penicillium_Bonferroni_0.2.csv")
-#nodes
-# Open links file
-links = read_csv("Edges_KEGG_Penicillium_Bonferroni_0.2.csv")
-#links
-#
 # Definition of ranges and positions for functions
 #
 # Transform edges to graph object
