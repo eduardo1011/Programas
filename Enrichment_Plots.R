@@ -623,9 +623,9 @@ myplot2 <- function(mydata, term, log.Pval) {
                                 breaks=seq(0,round(max(ups$log.Pval[0:total.terms]+3),digits = 0),3)) +
              scale_x_discrete("",limit=nodes$Entry[1:total.terms])+
              annotate("text", x = length(ups$log.Pval[1:total.terms])-1, 
-                      y = min(ups$log.Pval[1])+2,
+                      y = min(ups$log.Pval[1]),
                       label = 'bold("P = 0.05 (-log10)")',colour = "black", size = 3, parse = TRUE)+
-             annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])+.5, ymin = 0, ymax = 0,
+             annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])-1.5, ymin = 0, ymax = 0,
                       colour = "blue4", size = .3))
 }
 #
@@ -721,9 +721,9 @@ if (colnames(nodes[,2]) == "Exp") {
                                   breaks=seq(0,round(max(ups$log.Pval[0:total.terms]+3),digits = 0),3)) +
                scale_x_discrete("",limit=nodes$Entry[1:total.terms])+
                annotate("text", x = length(ups$log.Pval[1:total.terms])-1, 
-                        y = min(ups$log.Pval[1])+2,
+                        y = min(ups$log.Pval[1]),
                         label = 'bold("P = 0.05 (-log10)")',colour = "black", size = 3, parse = TRUE)+
-               annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])+.5, ymin = 0, ymax = 0,
+               annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])-1.5, ymin = 0, ymax = 0,
                         colour = "blue4", size = .5))
   }
   #
