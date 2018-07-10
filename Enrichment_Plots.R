@@ -703,7 +703,7 @@ if (colnames(nodes[,2]) == "Exp") {
                coord_fixed(ratio=7)+
                scale_y_continuous("Fold change",limit = c(-5,5)) +
                labs(color = "") +
-               scale_x_continuous("Proteins",breaks=seq(1,val,20)))
+               scale_x_continuous("Protein",breaks=seq(1,val,20)))
   }
   #
   #
