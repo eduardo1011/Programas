@@ -520,9 +520,9 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 50)) {
 if (colnames(nodes[,2]) == "Exp") {
   print("si hay datos de expresion")
   #
-  min.value.exp=min(nodes$Exp[!is.na(nodes$Exp)]) ## obtain negative value
+  min.value.exp=round(min(nodes$Exp[!is.na(nodes$Exp)])) ## obtain negative value
   #min.value.exp
-  max.value.exp= min.value.exp*-1 ## obtain positive value
+  max.value.exp=round(min.value.exp*-1) ## obtain positive value
   #max.value.exp
   #
   legend_image <- as.raster(matrix(rbPal(100), ncol=1))
@@ -557,7 +557,7 @@ if (colnames(nodes[,2]) == "Exp") {
              pt.cex=2)
       ##  positions             a=x, b= +y,c= x,d= -y
       rasterImage(legend_image, 1.09, .4, 1.15,.16) 
-      text(x=1.2, y = seq(0.4,.16,l=5),
+      text(x=1.19, y = seq(0.4,.16,l=5),
            labels = seq(max.value.exp,
                         min.value.exp,l=5),cex=.8,font = 2)
       text(1.05, .45, "Fold change", adj = c(0,0), cex = 1.2,font = 2)
