@@ -2,15 +2,6 @@
 
 use POSIX;
 
-
-
-
-##>>>>>>>============   Esta marca señala los cambios que he realizado, los cambios no tienen algún fin lucrativo, únicamente para facilitar la edición y manipulación del output para análisis posteriones.
-
-
-
-
-
 #    GeneMerge v1.4 - 2015
 
 #    GeneMerge-- Post-genomic analysis, data mining, and hypothesis testing
@@ -764,9 +755,10 @@ if ($abort eq "FALSE") {
 
 	# Go through the array and parse out all gene names that contribute
 	# to this GMRG term (could be one or more)
-	for ($x=7;$x<$arraylength;$x++) {				##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============
-	    $genenames = $genenames . "/$FinalData[$x]/, "; #########=======  el tabulador es el que se agrega después de cada ID, entonces hay que cambiarlo a que sea una comma.
-	}        									##>>>>>>>============ ##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============
+	for ($x=7;$x<$arraylength;$x++) {
+         $genenames = $genenames . "/$FinalData[$x]/, ";
+	    #$genenames = $genenames . "$FinalData[$x]\t"; %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Modificado por el comando de arriba
+	}        
 	# get function for this term from Ontology hash
 	if ($this_function = $Ontology_Hash{$GMRG_Term}) {
 	    #everything is cool
@@ -782,11 +774,9 @@ if ($abort eq "FALSE") {
 	}
 	
 	#print output yeah!
-##>>>>>>>============ en siguiente comando agregué el # alinicio como una columna para facilitar la edicion al agregar la etiqueta de alguna categoria C, F o P
-##>>>>>>>============ también cambié de posición el p-val ajustado, lo puse al final
-
-	print NF "\"\#\"\,\"$GMRG_Term\t$GMRGfreq_hash{$GMRG_Term}\t$array_count/$total_no_detected_genes\t$r_in_updown/$allupdownGMRGs\t$pValue\t$pValue_corrected\t$this_function\t$genenames\"\n";
-##>>>>>>>============	
+	#print NF "$GMRG_Term\t$GMRGfreq_hash{$GMRG_Term}\t$array_count/$total_no_detected_genes\t$r_in_updown\/$allupdownGMRGs\t$pValue\t$pValue_corrected\t$this_function\t$genenames\n";  %%%%%%%%%%%%%%%%%%%% modificado por el comando de abajo
+     print NF "\"$GMRG_Term\t$GMRGfreq_hash{$GMRG_Term}\t$array_count/$total_no_detected_genes\t$r_in_updown/$allupdownGMRGs\t$pValue\t$pValue_corrected\t$this_function\t$genenames\"\n"; 
+	
     }
     close(TEMPII);
     close(NF);
@@ -794,13 +784,8 @@ if ($abort eq "FALSE") {
     
     ########  Sort by P-value ########################################################     # 1.3
     
-
-##>>>>>>>============  al agregar anteriormente una columna se recorrieron los datos, entonces para que el siguiente comando hiciera bien su función cambié el valor 5 por el 6 donde ahora
-				 ##   está el P-value, así ya aparecen todos los genes 
-    $col = 6; # sort by P-value column  
- ##>>>>>>>============
-
-   
+    $col = 5; # sort by P-value column  
+    
     open(SORTING,"almost_final") || die "couldn't open file almost_final";
     @data = <SORTING>;
     @sorted = map { $_->[0] } sort sort_column map { [$_, split /\t/ ] } @data;
@@ -1056,29 +1041,34 @@ if ($abort eq "FALSE") {
     open(FINAL,">$results_filename") || die "couldn't create file $results_filename, check sytem permissions";
     
     # print file header
-        
+
+    #print FINAL "GeneMerge v$version\n\n";  
+    #print FINAL "Castillo-Davis, C.I. $year. GeneMerge v$version - post-genomic data analysis.\n\n";
+    #print FINAL "Output file name: $results_filename\n";
+    #print FINAL "Gene Association File:  $gene_association_file\n";
+    #print FINAL "Description File:  $description_file\n";
+    #print FINAL "Population File:  $population_genes_file\n";
+    #print FINAL "Study File:  $study_genes_file\n";
+    #print FINAL "Custom FDR: $custom_FDR_percentage\%\n\n";
+    
     # print column headers
-
-##>>>>>>>============ Agregué el categoria, y cambié lagunos nombres para dar compatibilidad de edición
-##>>>>>>>============ cambié de posición el p-val ajustado, lo puse al final
-
-##>>>>>>>============ algunos nombres los hice corresponder con loa nombres que pide el paquete GOplot para los análisis
-
-					#  category,  ID,   term,   adj_pval
-
-
-    print FINAL "\"Aspect\",\"GO\",\"Pop_freq\",\"Pop_frac\",\"Study_frac\",\"P\",\"adj_pval\",\"FDR_10\",\"FDR_5\",\"FDR_1\",\"$custom_FDR_header\",\"Term\",\"Entry\"\n";
-
-#"Aspect\tGO\tPop_freq\tPop_frac\tStudy_frac\tP\tBonf_Cor_P\tFDR_10\tFDR_5\tFDR_1\t$custom_FDR_header\tTerm\tqacc\n";
-
-##>>>>>>>============
-
+    #print FINAL "GMRG_Term\tPop_freq\tPop_frac\tStudy_frac\tP\tBonf_Cor_P\tFDR_10\tFDR_5\tFDR_1\t$custom_FDR_header\tDescription\tContributing_genes\n";  %%%%%% modificado por el comando de abajo
+    print FINAL "\"GO\",\"Pop_freq\",\"Pop_frac\",\"Study_frac\",\"P\",\"adj_pval\",\"FDR_10\",\"FDR_5\",\"FDR_1\",\"$custom_FDR_header\",\"Term\",\"Entry\"\n";
     
     # print main data
     print FINAL @DATA;
     
     # print footer stats
-    
+    #print FINAL "\nTotal number of genes: $total_no_detected_genes\n";
+    #print FINAL "Total number of Study genes: $total_no_updown_genes\n";
+    #print FINAL "Total number of Study gene GMRG terms (pop non-singletons): $no_of_up_down_GMRG_terms ($BCr)\n";
+
+    #print FINAL "FDR Threshold P-values: [10% = $FDR_10_perc_threshold], [5% = $FDR_5_perc_threshold], [1% = $FDR_1_perc_threshold], [$custom_FDR_percentage% = $FDR_custom_perc_threshold]\n"; # 1.4
+  
+
+    #print FINAL "Genes with GMRG information: $up_down_genes_with_annotation\n";
+    #print FINAL "Genes with no GMRG information: $GenesNoInfo\n";
+    #print FINAL "These are:\t$genes_not_found_in_ontology\t";
     
     close(FINAL);
     
@@ -1088,22 +1078,12 @@ if ($abort eq "FALSE") {
     ###############################################################################################################
     
     # create an html file name and the value for the custom FDR header
-
-
-##>>>>>>>============ he desabilitado esta opción que genera un fichero con formato html ##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============
-
-
     #$results_filename_html = $results_filename . ".html";
-
-##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============
-
     
     #open(HTML,">$results_filename_html") || die "couldn't create $results_filename_html, check system permissions";
     
     
     # print HTML header ##############################################
-
-##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============##>>>>>>>============
     
     print HTML "<html>\n";
     print HTML "<title> GeneMerge Output - $results_filename</title>\n";
@@ -1312,5 +1292,4 @@ sub sort_column { # sorts a tab-delimited file according to a particular $col
       ($b->[$col] eq "NA" ? -1 : 
        $a->[$col] <=> $b->[$col])); 
 }
-
 
