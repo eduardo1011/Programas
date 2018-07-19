@@ -653,7 +653,7 @@ if ((length(unique(links$Entry)) > 0) && (length(unique(links$Entry)) <= 6)) {
 upset(ups,sets=nodes$Entry[1:total.terms],
       sets.bar.color = "darkgoldenrod2",order.by ="freq",empty.intersections = NULL,
       point.size=2,mainbar.y.label="KEGG Pathways Functional Annotation",sets.x.label = "",
-      main.bar.color="gray40",matrix.color="gray40",shade.color="wheat3",
+      main.bar.color="black",matrix.color="black",shade.color="wheat3",
       line.size=0.5,show.numbers = "yes",group.by = "degree",
       matrix.dot.alpha = 0.5,mb.ratio = c(0.7, 0.3),
       #c(intersection size title, intersection size tick labels, set size title, set size tick labels, set names, numbers above bars)
@@ -756,7 +756,7 @@ if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.term
     upset(ups,sets=nodes$Entry[1:total.terms],
           sets.bar.color = "darkgoldenrod2",order.by ="freq",empty.intersections = NULL,
           point.size=2,mainbar.y.label="KEGG Pathways Functional Annotation",sets.x.label = "",
-          main.bar.color="gray40",matrix.color="gray40",shade.color="wheat3",
+          main.bar.color="black",matrix.color="black",shade.color="wheat3",
           line.size=0.5,show.numbers = "yes",group.by = "degree",
           matrix.dot.alpha = 0.5,mb.ratio = c(0.7, 0.3),
           #c(intersection size title, intersection size tick labels, set size title, set size tick labels, set names, numbers above bars)
