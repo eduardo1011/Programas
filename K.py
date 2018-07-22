@@ -673,7 +673,7 @@ if os.path.exists("Enrichment_Plots.Rout"): os.remove("Enrichment_Plots.Rout")
 aaa=' '+str(kegg[(kegg.P < 0.05)]['P'].count())+' Pathways were found with P-value < 0.05'
 bbb=DataFrame.to_string(kegg[(kegg.P < 0.05)].rename(columns={'GO':'Pathway'},index=str),index=True)
 content_job_plots=os.listdir(dir_plots)
-content_job_str ="\n".join(content_job_plots)
+content_job_str =" ".join(content_job_plots)
 links="\n".join(brow)
 #
 f= open("Report_"+dir_name_plots+".txt","w")
