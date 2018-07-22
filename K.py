@@ -284,10 +284,7 @@ if User_method == FDR:
     kegg_user_cut_off=kegg[kegg[filter_fdr_T].str.contains("T") == True]
 else: 
     a='b'
-##
-info_str="\n".join(info)
-kegg_genome_id=DataFrame(re.findall('T[0-9]{1,5}   '+Prefix,info_str)).replace({'   '+Prefix+'.*':''},regex=True)[0].iloc[0]
-webbrowser.open_new_tab("https://www.kegg.jp/dbget-bin/www_bget?gn:"+kegg_genome_id+"")
+
 ## Enrichment pathways after cut-off
 kegg_user_cut_off['Freq']=kegg_user_cut_off['Entry'].str.split().str.len()
 
@@ -342,7 +339,10 @@ output_firefox= Popen("export BROWSER=firefox",shell=True, stdin=PIPE,stdout=PIP
 import webbrowser as wb
 import webbrowser
 ##
-   
+info_str="\n".join(info)
+kegg_genome_id=DataFrame(re.findall('T[0-9]{1,5}   '+Prefix,info_str)).replace({'   '+Prefix+'.*':''},regex=True)[0].iloc[0]
+output = Popen("python -m webbrowser https://www.kegg.jp/dbget-bin/www_bget?gn:"+kegg_genome_id+"", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True).stdout.read()
+#webbrowser.open_new_tab("https://www.kegg.jp/dbget-bin/www_bget?gn:"+kegg_genome_id+"")   
 ##
 print('\n▬▬▬▬▬▬▬▬\nStep 6: Open pathways in the browser\n▬▬▬▬▬▬▬▬\n..........\n')
 #
@@ -720,3 +720,4 @@ if os.path.exists(report): shutil.move(report, dir_name_plots)
 if os.path.exists(xlsx): shutil.move(xlsx, dir_name_plots)
 if os.path.exists("Enrichment_Plots.R"): os.remove("Enrichment_Plots.R")
 output3 = Popen("exit", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True).stdout.read()
+if os.path.exists("enrichment.py"): os.remove("enrichment.py")
