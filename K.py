@@ -592,7 +592,6 @@ else:
 
 # In[ ]:
 
-
 ## Control of creating of directories
 content_dir_list=os.listdir("./")
 content_dir_str =" ".join(content_dir_list)
@@ -613,6 +612,7 @@ if re.search('job_[0-9]{1,3}',content_dir_str):
 else:
     os.makedirs('job_01/job_01_plots')
     dir_name_plots='job_01'
+dir_plots='./'+dir_name_plots+'/'+dir_name_plots+'_plots/'
 
 
 # In[ ]:
@@ -620,7 +620,7 @@ else:
 
 ## Open R script from github
 r_script=requests.get("https://raw.githubusercontent.com/eduardo1011/Programas/master/Enrichment_Plots.R").content.decode()
-R_script_enrich = re.sub("./plots/",'./'+dir_name_plots+'/'+dir_name_plots+'_plots/',r_script)
+R_script_enrich = re.sub("./plots/",dir_plots,r_script)
 ## Create file with R script
 f= open("Enrichment_Plots.R","w")
 f.write('#\n#\n# Libraries\n#\n'+
@@ -672,19 +672,8 @@ if os.path.exists("Enrichment_Plots.Rout"): os.remove("Enrichment_Plots.Rout")
 ## Analysis report
 aaa=' '+str(kegg[(kegg.P < 0.05)]['P'].count())+' Pathways were found with P-value < 0.05'
 bbb=DataFrame.to_string(kegg[(kegg.P < 0.05)].rename(columns={'GO':'Pathway'},index=str),index=True)
-
-plot_dir=DataFrame(re.findall('job_[0-9]{1,3}',content_dir_str)).sort_values(by=[0],ascending=False).reset_index(drop=True)
-plot_dir2=plot_dir[0].str.split('_', expand=True)
-plot_dir3=float(plot_dir2[1].iloc[0])
-plot_dir4=str(int(float(plot_dir3+1)))
-if float(plot_dir4) >= 10:
-    dir_name_plots_content='job_'+plot_dir4+'/'+'job_'+plot_dir4+'_plots'
-else:
-    dir_name_plots_content='job_0'+plot_dir4+'/'+'job_0'+plot_dir4+'_plots'
-
-content_job_list=os.listdir(dir_name_plots_content)
-
-content_job_str ="\n".join(content_job_list)
+content_job_plots=os.listdir(dir_plots)
+content_job_str ="\n".join(content_job_plots)
 links="\n".join(brow)
 #
 f= open("Report_"+dir_name_plots+".txt","w")
@@ -703,7 +692,7 @@ f.write('#\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
         '\n# Links to the KEGG pathways maps\n#\n'+
         links+
         '\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'+
-        '\n# Graphics stored in '+dir_name_plots+' directory\n#\n'+
+        '\n# Graphics stored in '+dir_plots+' directory\n#\n'+
         content_job_str+'\n#\n#\n#')
 f.close()
 
