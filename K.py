@@ -595,23 +595,23 @@ else:
 ## Control of creating of directories
 content_dir_list=os.listdir("./")
 content_dir_str =" ".join(content_dir_list)
-if re.search('job_[0-9]{1,3}',content_dir_str):
-    plot_dir=DataFrame(re.findall('job_[0-9]{1,3}',content_dir_str)).sort_values(by=[0],ascending=False).reset_index(drop=True)
+if re.search('job_[0-9]{1,3}_KEGG',content_dir_str):
+    plot_dir=DataFrame(re.findall('job_[0-9]{1,3}_KEGG',content_dir_str)).sort_values(by=[0],ascending=False).reset_index(drop=True)
     plot_dir2=plot_dir[0].str.split('_', expand=True)
     plot_dir3=float(plot_dir2[1].iloc[0])
     plot_dir4=str(int(float(plot_dir3+1)))
     if float(plot_dir4) >= 10:
-        os.makedirs('job_'+plot_dir4+'/'+'job_'+plot_dir4+'_plots')
-        dir_name_plots='job_'+plot_dir4
+        os.makedirs('job_'+plot_dir4+'_KEGG/'+'job_'+plot_dir4+'_KEGG_plots')
+        dir_name_plots='job_'+plot_dir4+'_KEGG'
     else:
-        if os.path.exists('job_0'+plot_dir4):
-            dir_name_plots='job_0'+plot_dir4
+        if os.path.exists('job_0'+plot_dir4+'_KEGG'):
+            dir_name_plots='job_0'+plot_dir4+'_KEGG'
         else:
-            os.makedirs('job_0'+plot_dir4+'/'+'job_0'+plot_dir4+'_plots')
-            dir_name_plots='job_0'+plot_dir4
+            os.makedirs('job_0'+plot_dir4+'_KEGG/'+'job_0'+plot_dir4+'_KEGG_plots')
+            dir_name_plots='job_0'+plot_dir4+'_KEGG'
 else:
-    os.makedirs('job_01/job_01_plots')
-    dir_name_plots='job_01'
+    os.makedirs('job_01_KEGG/job_01_KEGG_plots')
+    dir_name_plots='job_01_KEGG'
 dir_plots='./'+dir_name_plots+'/'+dir_name_plots+'_plots/'
 
 
