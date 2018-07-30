@@ -201,7 +201,7 @@ output1 = Popen("perl GeneMerge1.4.pl ./data/kegg_assotiation ./data/Pathways_Sp
 output2 = Popen("perl -p -e 's/\t/"'"'","'"'"/g; s/, "'"'"/"'"'"/g' ./data/KEGG_Pathways_enrichment_GeneMerge.csv > ./data/KEGG_Pathways_enrichment_GeneMerge_001.csv", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT).stdout.read()
 
 ## Shows number of pathways found
-kegg_01=pd.read_csv('./data/KEGG_Pathways_enrichment_GeneMerge.csv',usecols=orden_columnas)
+kegg_01=pd.read_csv('./data/KEGG_Pathways_enrichment_GeneMerge_001.csv',usecols=orden_columnas)
 min_val_kegg_adj_pval=kegg_01['P'].min()
 max_val_kegg_adj_pval=kegg_01['P'].max()
 
