@@ -169,7 +169,9 @@ if len(inp_file.columns) == 3:
     ## Gene list mapping against "back_with_pathw" and then save this list
     list_input_match=pd.DataFrame.merge(list_input[['Gene']].dropna(),back_with_pathw, how="left", on=list(list_input[['Gene']])).dropna()
     list_input_match[['Gene']].drop_duplicates().to_csv('./data/Gene_list.txt',header=None,index=False, float_format='%.0f')
-    output = Popen("sed -i 's/[.]0//g' ./data/Gene_list.txt", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True).stdout.read()
+    v001="sed -i 's/[.]0//g' ./data/Gene_list.txt"
+    subprocess.call(v001,shell=True)
+    #output = Popen("sed -i 's/[.]0//g' ./data/Gene_list.txt", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True).stdout.read()
     ## Build of kegg assotiation file
     aa=back_with_pathw.pivot_table(values='Entry',index=['Gene'],aggfunc=sum).reset_index()
     bb=aa[['Entry']].replace({Prefix:';'+Prefix},regex=True).replace({'$':';'},regex=True).replace({'^;':''},regex=True)
