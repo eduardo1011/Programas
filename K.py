@@ -192,7 +192,7 @@ else:
     pd.concat([aa[['Gene']],bb[['Entry']]],axis=1,join='outer').to_csv('./data/kegg_assotiation',sep='\t',header=None,index=None)
 
 ## Over-representation test (hyper-geometric distriburion)
-#orden_columnas=[0,4,5,9,10,11]
+orden_columnas=[0,4,5,9,10,11]
 #v002="perl GeneMerge1.4.pl ./data/kegg_assotiation ./data/Pathways_Species.txt ./data/Background_Genes.txt ./data/Gene_list.txt ./data/KEGG_Pathways_enrichment_GeneMerge.csv"
 #subprocess.call(v002,shell=True)
 #v003="perl -i 's/\t/"'"'","'"'"/g; s/, "'"'"/"'"'"/g' ./data/KEGG_Pathways_enrichment_GeneMerge.csv"
