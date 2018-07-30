@@ -191,13 +191,13 @@ else:
     pd.concat([aa[['Gene']],bb[['Entry']]],axis=1,join='outer').to_csv('./data/kegg_assotiation',sep='\t',header=None,index=None)
 
 ## Over-representation test (hyper-geometric distriburion)
-orden_columnas=[0,4,5,9,10,11]
-v002="perl GeneMerge1.4.pl ./data/kegg_assotiation ./data/Pathways_Species.txt ./data/Background_Genes.txt ./data/Gene_list.txt ./data/KEGG_Pathways_enrichment_GeneMerge.csv"
-subprocess.call(v002,shell=True)
-v003="perl -i 's/\t/"'"'","'"'"/g; s/, "'"'"/"'"'"/g' ./data/KEGG_Pathways_enrichment_GeneMerge.csv"
-subprocess.call(v003,shell=True)
-#output1 = Popen("perl GeneMerge1.4.pl ./data/kegg_assotiation ./data/Pathways_Species.txt ./data/Background_Genes.txt ./data/Gene_list.txt ./data/KEGG_Pathways_enrichment_GeneMerge.csv", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True).stdout.read()
-#output2 = Popen("sed -i 's/\t/"'"'","'"'"/g; s/, "'"'"/"'"'"/g' ./data/KEGG_Pathways_enrichment_GeneMerge.csv", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True).stdout.read()
+#orden_columnas=[0,4,5,9,10,11]
+#v002="perl GeneMerge1.4.pl ./data/kegg_assotiation ./data/Pathways_Species.txt ./data/Background_Genes.txt ./data/Gene_list.txt ./data/KEGG_Pathways_enrichment_GeneMerge.csv"
+#subprocess.call(v002,shell=True)
+#v003="perl -i 's/\t/"'"'","'"'"/g; s/, "'"'"/"'"'"/g' ./data/KEGG_Pathways_enrichment_GeneMerge.csv"
+#subprocess.call(v003,shell=True)
+output1 = Popen("perl GeneMerge1.4.pl ./data/kegg_assotiation ./data/Pathways_Species.txt ./data/Background_Genes.txt ./data/Gene_list.txt ./data/KEGG_Pathways_enrichment_GeneMerge.csv", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT).stdout.read()
+output2 = Popen("sed -i 's/\t/"'"'","'"'"/g; s/, "'"'"/"'"'"/g' ./data/KEGG_Pathways_enrichment_GeneMerge.csv", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT).stdout.read()
 
 ## Shows number of pathways found
 kegg_01=pd.read_csv('./data/KEGG_Pathways_enrichment_GeneMerge.csv',usecols=orden_columnas)
