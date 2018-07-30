@@ -51,7 +51,7 @@ kegg_orgs = requests.get("http://rest.kegg.jp/list/organism").content.decode()
 content_dir_list=os.listdir("./")
 content_dir_str =" ".join(content_dir_list)
 
-organism=input('▬▬▬▬▬▬▬▬\nStep 1: Submit a gender (e.g., Penicillium)\n▬▬▬▬▬▬▬▬\n=====> : ')
+organism=input('========\nStep 1: Submit a gender (e.g., Penicillium)\n========\n=====> : ')
 if re.search(organism,kegg_orgs):
     species=DataFrame(re.findall('T..........'+organism+' [a-z]{1,20}',
                                  kegg_orgs)).rename(columns={0:'Organism'}).replace({'\t':'   '},
@@ -66,10 +66,10 @@ if re.search(organism,kegg_orgs):
     prefi=DataFrame.to_string(pref,header=None,index=None)
     
     
-    Prefix=input('\n▬▬▬▬▬▬▬▬\nStep 2: Select Prefix (e.g., pcs)\n▬▬▬▬▬▬▬▬\n=====> : ')
+    Prefix=input('\n========\nStep 2: Select Prefix (e.g., pcs)\n========\n=====> : ')
 else:
     print('\n!!!!!!! Organism not found !!!!!!!\n')
-    organism=input('\n▬▬▬▬▬▬▬▬\nStep 1: Submit a gender (e.g., Penicillium)\n▬▬▬▬▬▬▬▬\n=====> : ')
+    organism=input('\n========\nStep 1: Submit a gender (e.g., Penicillium)\n========\n=====> : ')
     if re.search(organism,kegg_orgs):
         species=DataFrame(re.findall('T..........'+organism+' [a-z]{1,20}',
                                  kegg_orgs)).rename(columns={0:'Organism'}).replace({'\t':'   '},
@@ -82,18 +82,18 @@ else:
         info=DataFrame.to_string(inf,header=False,index=False).split('\n')
         pref=DataFrame(info).replace({'T[0-9]{1,5}   ':'','   '+organism+'.*':''},regex=True)
         prefi=DataFrame.to_string(pref,header=None,index=None)
-        Prefix=input('\n▬▬▬▬▬▬▬▬\nStep 2: Select Prefix (e.g., pcs)\n▬▬▬▬▬▬▬▬\n=====> : ')
+        Prefix=input('\n========\nStep 2: Select Prefix (e.g., pcs)\n========\n=====> : ')
     else:
         print('\n!!!!!!! Organism not found !!!!!!!\n')
         sys.exit()
         
 if re.search(Prefix,prefi):
-    input_file=input('\n▬▬▬▬▬▬▬▬\nStep 3: Submit gene list\n▬▬▬▬▬▬▬▬\n=====> : ')
+    input_file=input('\n========\nStep 3: Submit gene list\n========\n=====> : ')
 else:
     print('\n!!!!!!! Prefix not found !!!!!!!\n')
-    Prefix=input('\n▬▬▬▬▬▬▬▬\nStep 2: Select Prefix (e.g., pcs)\n▬▬▬▬▬▬▬▬\n=====> : ')
+    Prefix=input('\n========\nStep 2: Select Prefix (e.g., pcs)\n========\n=====> : ')
     if re.search(Prefix,prefi):
-        input_file=input('\n▬▬▬▬▬▬▬▬\nStep 3: Submit gene list\n▬▬▬▬▬▬▬▬\n=====> : ')
+        input_file=input('\n========\nStep 3: Submit gene list\n========\n=====> : ')
     else:
         print('\n!!!!!!! Prefix not found !!!!!!!\n')
         sys.exit()
@@ -103,7 +103,7 @@ if re.search(input_file,content_dir_str):
     inp_file=pd.read_csv(input_file,sep='\t',header=None)
 else:
     print('\n!!!!!!! File not found !!!!!!!\n')
-    input_file=input('\n▬▬▬▬▬▬▬▬\nStep 3: Submit gene list\n▬▬▬▬▬▬▬▬\n=====> : ')
+    input_file=input('\n========\nStep 3: Submit gene list\n========\n=====> : ')
     if re.search(input_file,content_dir_str):
         #print('')
         inp_file=pd.read_csv(input_file,sep='\t',header=None)
@@ -208,7 +208,7 @@ if kegg_01[(kegg_01.P < 0.05)]['P'].count() >= 1:
     Bonferroni='Bonferroni'
     FDR='FDR'
 
-    User_method=input('\n▬▬▬▬▬▬▬▬\nStep 4: Choose a Method (e.g., FDR / Bonferroni)\n▬▬▬▬▬▬▬▬\n=====> : ')
+    User_method=input('\n========\nStep 4: Choose a Method (e.g., FDR / Bonferroni)\n========\n=====> : ')
     if User_method == Bonferroni:
         a='b'
     else:
@@ -216,7 +216,7 @@ if kegg_01[(kegg_01.P < 0.05)]['P'].count() >= 1:
             a='b'
         else:       
             #print('\n!!!!! Try again !!!!!')
-            User_method=input('\n▬▬▬▬▬▬▬▬\nStep 4: Choose a Method (e.g., FDR / Bonferroni)\n▬▬▬▬▬▬▬▬\n=====> : ')
+            User_method=input('\n========\nStep 4: Choose a Method (e.g., FDR / Bonferroni)\n========\n=====> : ')
             if User_method == Bonferroni:
                 a='b'
             else:
@@ -229,7 +229,7 @@ if kegg_01[(kegg_01.P < 0.05)]['P'].count() >= 1:
     ##  cut-off for Bonferroni                
     if User_method == Bonferroni:
         print('\n===== Must be in this range: ',min_val_kegg_adj_pval,' - ',max_val_kegg_adj_pval)
-        Bon_value=input('\n▬▬▬▬▬▬▬▬\nStep 5: Choose a Value (e.g., 0.1)\n▬▬▬▬▬▬▬▬\n=====> : ')
+        Bon_value=input('\n========\nStep 5: Choose a Value (e.g., 0.1)\n========\n=====> : ')
         Bon_cut_off=float(Bon_value)
         file_name_value=Bon_value
         if min_val_kegg_adj_pval <= Bon_cut_off <= max_val_kegg_adj_pval:
@@ -237,7 +237,7 @@ if kegg_01[(kegg_01.P < 0.05)]['P'].count() >= 1:
         else:
             print('\nIncorrect value')
             print('\n===== Must be in this range: ',min_val_kegg_adj_pval,' - ',max_val_kegg_adj_pval)
-            Bon_value=input('\n▬▬▬▬▬▬▬▬\nStep 5: Choose a Value (e.g., 0.1)\n▬▬▬▬▬▬▬▬\n=====> : ')
+            Bon_value=input('\n========\nStep 5: Choose a Value (e.g., 0.1)\n========\n=====> : ')
             Bon_cut_off=float(Bon_value)
             file_name_value=Bon_value
             if min_val_kegg_adj_pval <= Bon_cut_off <= max_val_kegg_adj_pval:
@@ -250,7 +250,7 @@ if kegg_01[(kegg_01.P < 0.05)]['P'].count() >= 1:
     else:
         if User_method == FDR:
             print('\n===== Must be in this range: ',min_val_kegg_adj_pval,' - ',max_val_kegg_adj_pval)
-            FDR_value=input('\n▬▬▬▬▬▬▬▬\nStep 5: Choose a Value (e.g., 0.05)\n▬▬▬▬▬▬▬▬\n=====> : ')
+            FDR_value=input('\n========\nStep 5: Choose a Value (e.g., 0.05)\n========\n=====> : ')
             FDR_cut_off=float(FDR_value)*100
             file_name_value=FDR_value
             if min_val_kegg_adj_pval <= FDR_cut_off/100 <= max_val_kegg_adj_pval:
@@ -259,7 +259,7 @@ if kegg_01[(kegg_01.P < 0.05)]['P'].count() >= 1:
             else:
                 print('\nIncorrect value')
                 print('\n===== Must be in this range: ',min_val_kegg_adj_pval,' - ',max_val_kegg_adj_pval)
-                FDR_value=input('\n▬▬▬▬▬▬▬▬\nStep 5: Choose a Value (e.g., 0.05)\n▬▬▬▬▬▬▬▬\n=====> : ')
+                FDR_value=input('\n========\nStep 5: Choose a Value (e.g., 0.05)\n========\n=====> : ')
                 FDR_cut_off=float(FDR_value)*100
                 file_name_value=FDR_value
                 if min_val_kegg_adj_pval <= FDR_cut_off/100 <= max_val_kegg_adj_pval:
@@ -344,7 +344,7 @@ kegg_genome_id=DataFrame(re.findall('T[0-9]{1,5}   '+Prefix,info_str)).replace({
 output = Popen("python -m webbrowser https://www.kegg.jp/dbget-bin/www_bget?gn:"+kegg_genome_id+"", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True).stdout.read()
 #webbrowser.open_new_tab("https://www.kegg.jp/dbget-bin/www_bget?gn:"+kegg_genome_id+"")   
 ##
-print('\n▬▬▬▬▬▬▬▬\nStep 6: Open pathways in the browser\n▬▬▬▬▬▬▬▬\n..........\n')
+print('\n========\nStep 6: Open pathways in the browser\n========\n..........\n')
 #
 if max_val_pathways > 0:
     aa=kegg_user_cut_off.iloc[[0]]
@@ -644,7 +644,7 @@ f.close()
 # In[ ]:
 
 
-print('▬▬▬▬▬▬▬▬\nStep 7: Generating graphics\n▬▬▬▬▬▬▬▬\n..........\n')
+print('========\nStep 7: Generating graphics\n========\n..........\n')
 
 
 # In[ ]:
@@ -677,8 +677,8 @@ content_job_str ="\n".join(content_job_plots)
 links="\n".join(brow)
 #
 f= open("Report_"+dir_name_plots+".txt","w")
-f.write('#\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n#'+
-        ' Enrichment Analysis Report\n#\n# Program Name: \n#\n#\n#\n#\n#\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'+
+f.write('#\n# ===================================================================\n#'+
+        ' Enrichment Analysis Report\n#\n# Program Name: \n#\n#\n#\n#\n#\n# ==================================================================='+
         '\n# Parameters\n#'
         '\n# Organism:           '+organism+
         '\n# KEGG GENOME:        '+kegg_genome_id+
@@ -686,12 +686,12 @@ f.write('#\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
         '\n# Study File:         '+input_file+
         '\n# Correction Method:  '+User_method+
         '\n# Cut-off:            '+file_name_value+
-        '\n#\n#\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n#'+
+        '\n#\n#\n# ===================================================================\n#'+
         aaa+'\n#\n'+
-        bbb+'#\n\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'+
+        bbb+'#\n\n# ==================================================================='+
         '\n# Links to the KEGG pathways maps\n#\n'+
         links+
-        '\n# ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'+
+        '\n# ==================================================================='+
         '\n# Graphics stored in '+dir_plots+' directory\n#\n'+
         content_job_str+'\n#\n#\n#')
 f.close()
