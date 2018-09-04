@@ -23,7 +23,7 @@ my $response = $agent->post("$base/$tool/",
                               'format' => 'tab',
                               'from' => 'ACC',
                               'to' => 'ACC',
-						'columns' => 'protein names,genes,organism,organism-id,domain',
+						'columns' => 'id,protein names,genes,organism,organism-id',
                             ],'Content_Type' => 'form-data');
 
 while (my $wait = $response->header('Retry-After')) {
