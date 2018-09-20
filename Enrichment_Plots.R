@@ -10,8 +10,8 @@ library(grid)
 library(networkD3)
 library(UpSetR)
 #
-nodes = read_csv("**********")
-links = read_csv("!!!!!!!!!!")
+nodes = read_csv("qwertyuiop")
+links = read_csv("asdfghjkl")
 
 # Definition of ranges and positions for functions
 #
@@ -112,7 +112,7 @@ graph1=ggraph(link_tbl,
                  size = gnt.label.size,
                  repel = T,
                  fontface = "bold") +
-  #ggtitle('$$$$$$$$$$')+
+  #ggtitle('poiuytrewq')+
   coord_fixed() +
   ggforce::theme_no_axes(base.theme = theme_minimal())
 #
@@ -124,7 +124,7 @@ plot.1=ggdraw() + draw_plot(graph1, -0.17, 0, 1, 1)
 # Save Plot 1
 #
 {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-  png(file="@@@@@@@@@@Plot1_circle.png",
+  png(file="zxcvbnmPlot1_circle.png",
       width = 20,
       height = 10,
       units = "in",
@@ -210,7 +210,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
   plot.2=ggdraw() + draw_plot(graph2, -0.19, 0, 1, 1)
   
   {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-    png(file="@@@@@@@@@@Plot2_random.png",
+    png(file="zxcvbnmPlot2_random.png",
         width = 20,
         height = 10,
         units = "in",
@@ -326,7 +326,7 @@ if (colnames(nodes[,6]) == "Exp") {
   plot.3=ggdraw() + draw_plot(graph3, -0.17, 0, 1, 1)
   #
   {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-  png(file="@@@@@@@@@@Plot3_circle_foldchange.png",
+  png(file="zxcvbnmPlot3_circle_foldchange.png",
       width = 20,
       height = 10,
       units = "in",
@@ -428,7 +428,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
     plot.4=ggdraw() + draw_plot(graph4, -0.19, 0, 1, 1)
     #
     {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-      png(file="@@@@@@@@@@Plot4_random_foldchange.png",
+      png(file="zxcvbnmPlot4_random_foldchange.png",
           width = 20,
           height = 10,
           units = "in",
@@ -490,7 +490,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 50)) {
   #print(chord.node.size)
 }
 #
-{png(file="@@@@@@@@@@Plot5_ChordPlot.png",width = 25,height = 10,
+{png(file="zxcvbnmPlot5_ChordPlot.png",width = 25,height = 10,
      units = "in",
      res=600,bg="white")
   simple.chord = function() {
@@ -541,7 +541,7 @@ if (colnames(nodes[,6]) == "Exp") {
   #
   legend_image <- as.raster(matrix(rbPal(100), ncol=1))
   #
-  png(file="@@@@@@@@@@Plot6_ChordPlot_FoldChange.png",width = 25,height = 10,
+  png(file="zxcvbnmPlot6_ChordPlot_FoldChange.png",width = 25,height = 10,
        units = "in",
        res=600,bg="white")
     simple.chord = function() {
@@ -662,10 +662,10 @@ if ((length(unique(links$Entry)) > 0) && (length(unique(links$Entry)) <= 6)) {
   #print(gnp.node.size)
 }
 #
-{png(file="@@@@@@@@@@Polt7_UpSetR.png",width = 10,height = 7,units = "in",res=700,bg="white")
+{png(file="zxcvbnmPolt7_UpSetR.png",width = 10,height = 7,units = "in",res=700,bg="white")
 upset(ups,sets=nodes$Entry[1:total.terms],
       sets.bar.color = "darkgoldenrod2",order.by ="freq",empty.intersections = NULL,
-      point.size=2,mainbar.y.label="$$$$$$$$$$",sets.x.label = "",
+      point.size=2,mainbar.y.label="poiuytrewq",sets.x.label = "",
       main.bar.color="black",matrix.color="black",shade.color="wheat3",
       line.size=0.5,show.numbers = "yes",group.by = "degree",
       matrix.dot.alpha = 0.5,mb.ratio = c(0.7, 0.3),
@@ -765,10 +765,10 @@ if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.term
     #print(gnp.node.size)
   }
   #
-  png(file="@@@@@@@@@@Polt8_UpSetR_FoldChange.png",width = 10,height = 7,units = "in",res=700,bg="white")
+  png(file="zxcvbnmPolt8_UpSetR_FoldChange.png",width = 10,height = 7,units = "in",res=700,bg="white")
     upset(ups,sets=nodes$Entry[1:total.terms],
           sets.bar.color = "blue",order.by ="freq",empty.intersections = NULL,
-          point.size=2,mainbar.y.label="$$$$$$$$$$",sets.x.label = "",
+          point.size=2,mainbar.y.label="poiuytrewq",sets.x.label = "",
           main.bar.color="black",matrix.color="black",shade.color="wheat3",
           line.size=0.5,show.numbers = "yes",group.by = "degree",
           matrix.dot.alpha = 0.5,mb.ratio = c(0.7, 0.3),
