@@ -278,7 +278,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
 # Color for fold change
 #
 #
-if (colnames(nodes[,6]) == "Exp") {
+if (ncol(nodes) == 6) {
   rbPal <- colorRampPalette(c('green','black','red'))
   xcol <- rbPal(100)[as.numeric(cut(nodes$Exp,breaks = 100))]
   xcol=xcol[!is.na(xcol)]
@@ -390,7 +390,7 @@ if (colnames(nodes[,6]) == "Exp") {
 #
 #
 if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
-  if (colnames(nodes[,6]) == "Exp") {
+  if (ncol(nodes) == 6) {
     print("There are fold change values")
     graph4 = ggraph(link_tbl,layout = style.2) + 
       scale_color_gradient(low = c("green","black"), high = "red")+
@@ -530,7 +530,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 50)) {
 ######################################
 #
 #
-if (colnames(nodes[,6]) == "Exp") {
+if (ncol(nodes) == 6) {
   print("si hay datos de expresion")
   #
   min.value.exp=round(min(nodes$Exp[!is.na(nodes$Exp)]),digits=2) ## obtain negative value
@@ -682,7 +682,7 @@ dev.off()}
 ############# Plot 8 UpSet Plot, If fold change is included
 ######################################
 #
-if (colnames(nodes[,6]) == "Exp") {
+if (ncol(nodes) == 6) {
   print("si hay datos de expresion")
   val=length(only.entrys) # nrow number (total genes)
   #
