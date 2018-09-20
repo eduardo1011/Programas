@@ -1,5 +1,18 @@
+library(tidyverse)
+library(tidygraph)
+library(viridis)
+library(ggraph)
+library(circlize)
+library(RColorBrewer)
+library(igraph)
+library(cowplot)
+library(grid)
+library(networkD3)
+library(UpSetR)
 #
-#
+nodes = read_csv("**********")
+links = read_csv("!!!!!!!!!!")
+
 # Definition of ranges and positions for functions
 #
 # Transform edges to graph object
@@ -32,7 +45,7 @@ nodes.label = c(id,only.entrys)
 #
 # Colors configuration
 #
-colors=c(brewer.pal(12,"Set3")[c(c(1:8),c(11:12))],
+colors=c(brewer.pal(12,"Set3")[c(c(3:8),c(11:12))],
          brewer.pal(8,"Set2"),
          brewer.pal(12,"Paired"))
 many.colors=rep(colors,12)
@@ -46,7 +59,7 @@ colors.set=c(many.colors[nodes$num[1:total.terms]],
 # Edges color by cluster
 #
 num.edges.colors=as.numeric(nodes$Freq[1:total.terms]*100)
-col.edges.cluster=rep(colors[1:total.terms],num.edges.colors)
+col.edges.cluster=rep(many.colors[1:total.terms],num.edges.colors)
 ######################################
 ############# Plot 1 circle
 ######################################
@@ -99,7 +112,7 @@ graph1=ggraph(link_tbl,
                  size = gnt.label.size,
                  repel = T,
                  fontface = "bold") +
-  ggtitle('KEGG Pathways')+
+  #ggtitle('$$$$$$$$$$')+
   coord_fixed() +
   ggforce::theme_no_axes(base.theme = theme_minimal())
 #
@@ -111,7 +124,7 @@ plot.1=ggdraw() + draw_plot(graph1, -0.17, 0, 1, 1)
 # Save Plot 1
 #
 {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-  png(file="./plots/Plot1_circle.png",
+  png(file="@@@@@@@@@@Plot1_circle.png",
       width = 20,
       height = 10,
       units = "in",
@@ -143,7 +156,7 @@ plot.1=ggdraw() + draw_plot(graph1, -0.17, 0, 1, 1)
          bg="transparent",
          border = NA,
          bty = "n",
-         pt.bg = colors,
+         pt.bg = many.colors,
          x.intersp=1.2,
          y.intersp=1.5,
          col=NA,
@@ -187,7 +200,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
                    fontface = "bold") +
     theme_graph(title_size = 11,
                 title_face = "bold") +
-    ggtitle("KEGG Pathways")+
+    #ggtitle("KEGG Pathways")+
     coord_fixed() +
     ggforce::theme_no_axes(base.theme = theme_minimal())
   #
@@ -197,7 +210,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
   plot.2=ggdraw() + draw_plot(graph2, -0.19, 0, 1, 1)
   
   {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-    png(file="./plots/Plot2_random.png",
+    png(file="@@@@@@@@@@Plot2_random.png",
         width = 20,
         height = 10,
         units = "in",
@@ -230,7 +243,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
            bg="transparent",
            border = NA,
            bty = "n",
-           pt.bg = colors,
+           pt.bg = many.colors,
            x.intersp=1.2,
            y.intersp=1.5,
            col=NA,
@@ -265,11 +278,11 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
 # Color for fold change
 #
 #
-if (colnames(nodes[,2]) == "Exp") {
+if (colnames(nodes[,6]) == "Exp") {
   rbPal <- colorRampPalette(c('green','black','red'))
   xcol <- rbPal(100)[as.numeric(cut(nodes$Exp,breaks = 100))]
   xcol=xcol[!is.na(xcol)]
-  colors.fold.change=c(colors[nodes$num[1:total.terms]],xcol)
+  colors.fold.change=c(many.colors[nodes$num[1:total.terms]],xcol)
   #
   #
   graph3=ggraph(link_tbl,layout = style.1,
@@ -290,10 +303,10 @@ if (colnames(nodes[,2]) == "Exp") {
                    repel = T,
                    fontface = "bold",
                    hjust='outward') +
-    ggtitle("KEGG Pathways")+
+    #ggtitle("KEGG Pathways")+
     labs(colour="Fold change",size = "Log10 Total proteins")+
     theme_graph(title_size = 11, title_face = "bold") + 
-    scale_fill_manual(name = "Source")+
+    #scale_fill_manual(name = "Source")+
     coord_fixed() +
     ggforce::theme_no_axes(base.theme = theme_minimal())
   #
@@ -313,7 +326,7 @@ if (colnames(nodes[,2]) == "Exp") {
   plot.3=ggdraw() + draw_plot(graph3, -0.17, 0, 1, 1)
   #
   {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-  png(file="./plots/Plot3_circle_foldchange.png",
+  png(file="@@@@@@@@@@Plot3_circle_foldchange.png",
       width = 20,
       height = 10,
       units = "in",
@@ -345,7 +358,7 @@ if (colnames(nodes[,2]) == "Exp") {
          bg="transparent",
          border = NA,
          bty = "n",
-         pt.bg = colors,
+         pt.bg = many.colors,
          x.intersp=1.2,
          y.intersp=1.5,
          col=NA,
@@ -377,7 +390,7 @@ if (colnames(nodes[,2]) == "Exp") {
 #
 #
 if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
-  if (colnames(nodes[,2]) == "Exp") {
+  if (colnames(nodes[,6]) == "Exp") {
     print("There are fold change values")
     graph4 = ggraph(link_tbl,layout = style.2) + 
       scale_color_gradient(low = c("green","black"), high = "red")+
@@ -389,7 +402,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
                       position = "identity") +
       theme_graph(title_size = 11,
                   title_face = "bold") + 
-      ggtitle("KEGG Pathways")+
+      #ggtitle("KEGG Pathways")+
       labs(colour="Fold change",size = "Log10 Total proteins")+
       coord_fixed() +
       ggforce::theme_no_axes(base.theme = theme_minimal())
@@ -415,7 +428,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
     plot.4=ggdraw() + draw_plot(graph4, -0.19, 0, 1, 1)
     #
     {freq=rev(as.numeric(nodes$Freq[1:total.terms]))
-      png(file="./plots/Plot4_random_foldchange.png",
+      png(file="@@@@@@@@@@Plot4_random_foldchange.png",
           width = 20,
           height = 10,
           units = "in",
@@ -439,7 +452,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
       legend(x=-.45,y=-.75,
              legend=unique(nodes$Term[c(1:total.terms)]),
              cex=1.2,bg="transparent",border = NA,
-             bty = "n",pt.bg = colors,x.intersp=1.2,
+             bty = "n",pt.bg = many.colors,x.intersp=1.2,
              y.intersp=1.5,col=NA,
              text.font = 2,pch=22,
              pt.cex=2.5,ncol=1)
@@ -477,7 +490,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 50)) {
   #print(chord.node.size)
 }
 #
-{png(file="./plots/Plot5_ChordPlot.png",width = 25,height = 10,
+{png(file="@@@@@@@@@@Plot5_ChordPlot.png",width = 25,height = 10,
      units = "in",
      res=600,bg="white")
   simple.chord = function() {
@@ -502,7 +515,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 50)) {
     legend(x=1.03,y=.42, 
            legend=unique(paste(nodes$Term[1:total.terms]," _ ",
                                "(",nodes$Freq[1:total.terms],")")),
-           cex=1,bg="transparent",border = NA,pt.bg=colors,bty = "n",
+           cex=1,bg="transparent",border = NA,pt.bg=many.colors,bty = "n",
            x.intersp=1.5,y.intersp=1.5,col=NA,text.font = 2,pch=22,
            pt.cex=2)
    text(1.05, .45, "Pathway", adj = c(0,0), cex = 1.5,font = 2)
@@ -517,17 +530,18 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 50)) {
 ######################################
 #
 #
-if (colnames(nodes[,2]) == "Exp") {
+if (colnames(nodes[,6]) == "Exp") {
   print("si hay datos de expresion")
   #
-  min.value.exp=round(min(nodes$Exp[!is.na(nodes$Exp)])) ## obtain negative value
+  min.value.exp=round(min(nodes$Exp[!is.na(nodes$Exp)]),digits=2) ## obtain negative value
   #min.value.exp
-  max.value.exp=round(min.value.exp*-1) ## obtain positive value
+  max.value.exp=round(max(nodes$Exp[!is.na(nodes$Exp)]),digits=2)
+  #max.value.exp=round(min.value.exp*-1) ## obtain positive value
   #max.value.exp
   #
   legend_image <- as.raster(matrix(rbPal(100), ncol=1))
   #
-  png(file="./plots/Plot6_ChordPlot_FoldChange.png",width = 25,height = 10,
+  png(file="@@@@@@@@@@Plot6_ChordPlot_FoldChange.png",width = 25,height = 10,
        units = "in",
        res=600,bg="white")
     simple.chord = function() {
@@ -552,14 +566,13 @@ if (colnames(nodes[,2]) == "Exp") {
       legend(x=1.03,y=0, 
              legend=unique(paste(nodes$Term[1:total.terms]," _ ",
                                  "(",nodes$Freq[1:total.terms],")")),
-             cex=.9,bg="transparent",border = NA,pt.bg=colors,bty = "n",
+             cex=.9,bg="transparent",border = NA,pt.bg=many.colors,bty = "n",
              x.intersp=1.5,y.intersp=1.5,col=NA,text.font = 2,pch=22,
              pt.cex=2)
       ##  positions             a=x, b= +y,c= x,d= -y
       rasterImage(legend_image, 1.09, .4, 1.15,.16) 
       text(x=1.19, y = seq(0.4,.16,l=5),
-           labels = seq(max.value.exp,
-                        min.value.exp,l=5),cex=.8,font = 2)
+           labels = round(seq(max.value.exp,min.value.exp,l=5),digits=1),cex=.8,font = 2)
       text(1.05, .45, "Fold change", adj = c(0,0), cex = 1.2,font = 2)
       text(1.05, .03, "Pathway", adj = c(0,0), cex = 1.2,font = 2)
       circos.clear()}
@@ -639,20 +652,20 @@ if ((length(unique(links$Entry)) > 0) && (length(unique(links$Entry)) <= 6)) {
   set.name.size=1.5
   #print(gnp.node.size)
 } else if ((length(unique(links$Entry)) >= 6.1) && (length(unique(links$Entry)) <= 9)) {
-  set.name.size=1.25
+  set.name.size=1.35
   #print(gnp.node.size)
 } else if ((length(unique(links$Entry)) >= 9.1) && (length(unique(links$Entry)) <= 13)) {
-  set.name.size=1
+  set.name.size=1.2
   #print(gnp.node.size)
 } else if (length(unique(links$Entry)) >= 13.1) {
-  set.name.size=0.8
+  set.name.size=0.9
   #print(gnp.node.size)
 }
 #
-{png(file="./plots/Polt7_UpSetR.png",width = 10,height = 7,units = "in",res=700,bg="white")
+{png(file="@@@@@@@@@@Polt7_UpSetR.png",width = 10,height = 7,units = "in",res=700,bg="white")
 upset(ups,sets=nodes$Entry[1:total.terms],
       sets.bar.color = "darkgoldenrod2",order.by ="freq",empty.intersections = NULL,
-      point.size=2,mainbar.y.label="KEGG Pathways Functional Annotation",sets.x.label = "",
+      point.size=2,mainbar.y.label="$$$$$$$$$$",sets.x.label = "",
       main.bar.color="black",matrix.color="black",shade.color="wheat3",
       line.size=0.5,show.numbers = "yes",group.by = "degree",
       matrix.dot.alpha = 0.5,mb.ratio = c(0.7, 0.3),
@@ -669,7 +682,7 @@ dev.off()}
 ############# Plot 8 UpSet Plot, If fold change is included
 ######################################
 #
-if (colnames(nodes[,2]) == "Exp") {
+if (colnames(nodes[,6]) == "Exp") {
   print("si hay datos de expresion")
   val=length(only.entrys) # nrow number (total genes)
   #
@@ -701,7 +714,7 @@ if (colnames(nodes[,2]) == "Exp") {
                      axis.title.y = element_text(size=11,face="bold"),
                      legend.text = element_text(size=8,face="bold"))+
                coord_fixed(ratio=7)+
-               scale_y_continuous("Fold change",limit = c(-5,5)) +
+               scale_y_continuous("Fold change",limit = c(min.value.exp,max.value.exp)) +
                labs(color = "") +
                scale_x_continuous("Protein",breaks=seq(1,val,20)))
   }
@@ -716,10 +729,10 @@ if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.term
   # Function for bar plot
   myplot2 <- function(mydata, term, log.Pval) {
     plot <- (ggplot(ups) +
-               geom_bar(aes(x = term, weight = log.Pval),fill="darkgoldenrod2") +
-               geom_line(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),color = "blue4", size = .3 )+
+               geom_bar(aes(x = term, weight = log.Pval),fill="blue") +
+               geom_line(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),color = "darkorange1", size = .3 )+
                geom_point(aes(x = c(nodes$num[1:total.terms],rep(NA,length(rownames(ups))-length(nodes$Term[1:total.terms]))), y = -log10(0.05),color=-log10(0.05)),
-                          position = position_dodge(0.3),color = "blue4", size = 1.5)+
+                          position = position_dodge(0.3),color = "darkorange1", size = 1.5)+
                theme(axis.text.x = element_text(face="bold",size=8, angle=90),
                      axis.text.y = element_text(face="bold",size=8),
                      axis.title.y = element_text(size=11,face="bold"),
@@ -735,7 +748,7 @@ if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.term
                         y = min(ups$log.Pval[1]),
                         label = 'bold("P = 0.05 (-log10)")',colour = "black", size = text.annotate.size, parse = TRUE)+
                annotate("pointrange", x = length(ups$log.Pval[1:total.terms])-1, y =  min(ups$log.Pval[1])-1.5, ymin = 0, ymax = 0,
-                        colour = "blue4", size = .5))
+                        colour = "darkorange1", size = .5))
   }
   #
   if ((length(unique(links$Entry)) > 0) && (length(unique(links$Entry)) <= 6)) {
@@ -752,10 +765,10 @@ if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.term
     #print(gnp.node.size)
   }
   #
-  png(file="./plots/Polt8_UpSetR_FoldChange.png",width = 10,height = 7,units = "in",res=700,bg="white")
+  png(file="@@@@@@@@@@Polt8_UpSetR_FoldChange.png",width = 10,height = 7,units = "in",res=700,bg="white")
     upset(ups,sets=nodes$Entry[1:total.terms],
-          sets.bar.color = "darkgoldenrod2",order.by ="freq",empty.intersections = NULL,
-          point.size=2,mainbar.y.label="KEGG Pathways Functional Annotation",sets.x.label = "",
+          sets.bar.color = "blue",order.by ="freq",empty.intersections = NULL,
+          point.size=2,mainbar.y.label="$$$$$$$$$$",sets.x.label = "",
           main.bar.color="black",matrix.color="black",shade.color="wheat3",
           line.size=0.5,show.numbers = "yes",group.by = "degree",
           matrix.dot.alpha = 0.5,mb.ratio = c(0.7, 0.3),
