@@ -166,7 +166,7 @@ plot.1=ggdraw() + draw_plot(graph1, -0.17, 0, 1, 1)
          ncol=1)
   legend(x=-.45,
          y=-.57,
-         legend = "Pathways",
+         legend = "Pathway",
          pt.cex = NA,
          col=NA,
          pch=NA,
@@ -200,7 +200,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
                    fontface = "bold") +
     theme_graph(title_size = 11,
                 title_face = "bold") +
-    #ggtitle("KEGG Pathways")+
+    #ggtitle("KEGG Pathway")+
     coord_fixed() +
     ggforce::theme_no_axes(base.theme = theme_minimal())
   #
@@ -253,7 +253,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
            ncol=1)
     legend(x=-.45,
            y=-.57,
-           legend = "Pathways",
+           legend = "Pathway",
            pt.cex = NA,
            col=NA,
            pch=NA,
@@ -303,7 +303,7 @@ if (ncol(nodes) == 6) {
                    repel = T,
                    fontface = "bold",
                    hjust='outward') +
-    #ggtitle("KEGG Pathways")+
+    #ggtitle("KEGG Pathway")+
     labs(colour="Fold change",size = "Log10 Total proteins")+
     theme_graph(title_size = 11, title_face = "bold") + 
     #scale_fill_manual(name = "Source")+
@@ -368,7 +368,7 @@ if (ncol(nodes) == 6) {
          ncol=1)
   legend(x=-.45,
          y=-.57,
-         legend = "Pathways",
+         legend = "Pathway",
          pt.cex = NA,
          col=NA,
          pch=NA,
@@ -402,7 +402,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
                       position = "identity") +
       theme_graph(title_size = 11,
                   title_face = "bold") + 
-      #ggtitle("KEGG Pathways")+
+      #ggtitle("KEGG Pathway")+
       labs(colour="Fold change",size = "Log10 Total proteins")+
       coord_fixed() +
       ggforce::theme_no_axes(base.theme = theme_minimal())
@@ -456,7 +456,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 75)) {
              y.intersp=1.5,col=NA,
              text.font = 2,pch=22,
              pt.cex=2.5,ncol=1)
-      legend(x=-.45,y=-.57,legend = "Pathways",
+      legend(x=-.45,y=-.57,legend = "Pathway",
              pt.cex = NA,col=NA,
              pch=NA,pt.bg = NA,
              bty = "n",cex=1.5,
