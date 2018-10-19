@@ -509,7 +509,7 @@ if ((ecount(link_tbl) > 0) && (ecount(link_tbl) <= 50)) {
                                          niceFacing = TRUE,
                                          adj = c(0, .5), col = "black",
                                          cex =chord.node.size,
-                                         font = par("font"))
+                                         font = 2)
                              circos.par(track.margin=c(1,5))
                            }, bg.border = NA)
     legend(x=1.03,y=.42, 
@@ -560,7 +560,7 @@ if (ncol(nodes) == 6) {
                                            niceFacing = TRUE,
                                            adj = c(0, .5), col = "black",
                                            cex =chord.node.size,
-                                           font = par("font"))
+                                           font = 2)
                                circos.par(track.margin=c(1,5))
                              }, bg.border = NA)
       legend(x=1.03,y=0, 
