@@ -783,6 +783,6 @@ if ((length(nodes$Entry[1:total.terms]) > 0) && (length(nodes$Entry[1:total.term
 } else {
   print("There are no fold change values")
 } 
-dev.off()
+#dev.off()
 ############
 
