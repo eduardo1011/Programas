@@ -1,2 +1,2 @@
 Programa de bioinformática
-# Programs
+# Programas
