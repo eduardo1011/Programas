@@ -105,7 +105,7 @@ if ((total.terms > 1) && (total.terms <= 20)) {
 #
 #
 if (ncol(nodes) == 7) {
-  print("si hay valores de expresi�n")
+  print("si hay valores de expresi?n")
   V(link_tbl)$Value = nodes$Exp
   #
   rbPal <- colorRampPalette(c('green','black','red'))
@@ -121,7 +121,7 @@ if (ncol(nodes) == 7) {
   if (total.terms <= 60) {
     print("si hay 60 o menos de 60, se puede hacer complex y simple plots")
     if (total.terms <= 30) {
-      print("Son 30 o menos de 30 categor�as, usar configuraci�n de una barra")
+      print("Son 30 o menos de 30 categor?as, usar configuraci?n de una barra")
       print(paste("el ancho de la figura es:",width.png))
       #
       # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -168,11 +168,11 @@ if (ncol(nodes) == 7) {
           scale_x_discrete(limits=rev(for.bar$Entry))+
           geom_text(aes(x=Entry,y=log.pval+.5,label=Freq),size=6.7,fontface ="bold")+ #<---------------------
         #ggtitle("-log(P-value) and\n -log(Corrected P-value)")+
-          theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama�o del titulo sobre el grafico
+          theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama?o del titulo sobre el grafico
                 axis.title.x =element_blank(),# element_text(colour="black",size=27,face="bold",hjust = 0,vjust = 10),
                 axis.title.y = element_blank(),
                 axis.text.y = element_text(colour=c("white",rep("black",30)),size=19,
-                                           face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama�o y color de texto de eje x
+                                           face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama?o y color de texto de eje x
                 axis.text.x = element_text(colour="black",size=19,face="bold",vjust = 0),
                 axis.ticks.length =unit(.2, "cm"), #reduce la longitud de las marcas en la linea de escala de los ejes x y
                 axis.ticks.y.left = element_line(colour = "black",size=3,unit(0, "cm")),
@@ -471,7 +471,7 @@ if (ncol(nodes) == 7) {
                          transparency = 0,
                          directional = i,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del circulo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -569,7 +569,7 @@ if (ncol(nodes) == 7) {
                          transparency = 0,
                          directional = i,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del circulo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -696,7 +696,7 @@ if (ncol(nodes) == 7) {
                          transparency = 0,
                          directional = i,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del c?rculo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -808,7 +808,7 @@ if (ncol(nodes) == 7) {
                          transparency = i,
                          directional = -1,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del c?rculo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -992,9 +992,9 @@ if (ncol(nodes) == 7) {
       }
       # >
     } else {
-      print("son 31 o m�s de 31 y menos de 60, usar la configuraci�n de dos barras")
+      print("son 31 o m?s de 31 y menos de 60, usar la configuraci?n de dos barras")
       print(paste("el ancho de la figura es:",width.png))
-      # aqu� usar la nueva configuraci�n para agregar dos barras
+      # aqu? usar la nueva configuraci?n para agregar dos barras
       # controlar el ancho de la figura para esta figura don dos barras
       # First part of the data
       #
@@ -1033,11 +1033,11 @@ if (ncol(nodes) == 7) {
         scale_x_discrete(limits=rev(for.bar.1_30$Entry))+
         geom_text(aes(x=Entry,y=log.pval+.5,label=Freq),size=6.7,fontface ="bold")+ #<---------------------
       #ggtitle("-log(P-value) and\n -log(Corrected P-value)")+
-        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama�o del titulo sobre el grafico
+        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama?o del titulo sobre el grafico
               axis.title.x =element_blank(),# element_text(colour="black",size=27,face="bold",hjust = 0,vjust = 10),
               axis.title.y = element_blank(),
               axis.text.y = element_text(colour=c("white",rep("black",30)),size=19,
-                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama�o y color de texto de eje x
+                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama?o y color de texto de eje x
               axis.text.x = element_text(colour="black",size=19,face="bold",vjust = 0),
               axis.ticks.length =unit(.2, "cm"), #reduce la longitud de las marcas en la linea de escala de los ejes x y
               axis.ticks.y.left = element_line(colour = "black",size=3,unit(0, "cm")),
@@ -1090,11 +1090,11 @@ if (ncol(nodes) == 7) {
         scale_x_discrete(limits=rev(for.bar.31_final$Entry))+
         geom_text(aes(x=Entry,y=log.pval+.5,label=Freq),size=6.7,fontface ="bold")+ #<---------------------
       #ggtitle("-log(P-value) and\n -log(Corrected P-value)")+
-        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama�o del titulo sobre el grafico
+        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama?o del titulo sobre el grafico
               axis.title.x =element_blank(),# element_text(colour="black",size=27,face="bold",hjust = 0,vjust = 10),
               axis.title.y = element_blank(),
               axis.text.y = element_text(colour=c("white",rep("black",30)),size=19,
-                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama�o y color de texto de eje x
+                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama?o y color de texto de eje x
               axis.text.x = element_text(colour="black",size=19,face="bold",vjust = 0),
               axis.ticks.length =unit(.2, "cm"), #reduce la longitud de las marcas en la linea de escala de los ejes x y
               axis.ticks.y.left = element_line(colour = "black",size=3,unit(0, "cm")),
@@ -1391,7 +1391,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -1487,7 +1487,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -1614,7 +1614,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -1726,7 +1726,7 @@ if (ncol(nodes) == 7) {
                        transparency = i,
                        directional = -1,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -1908,7 +1908,7 @@ if (ncol(nodes) == 7) {
     # >
     }
   } else {
-    print("hay 61 o m�s de 61, se puede hacer �nicamente plots simples")
+    print("hay 61 o m?s de 61, se puede hacer ?nicamente plots simples")
     print(paste("el ancho de la figura es:",width.png))
     #
     # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -2058,7 +2058,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -2156,7 +2156,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -2283,7 +2283,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -2395,7 +2395,7 @@ if (ncol(nodes) == 7) {
                        transparency = i,
                        directional = -1,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -2584,7 +2584,7 @@ if (ncol(nodes) == 7) {
 # =================================================================================================
 # =================================================================================================
 } else {
-  print("no hay valores de expresi�n")
+  print("no hay valores de expresi?n")
   prot.col=rep("blue",1000)#9D9D9D
   col.set=c(many.colors[nodes$num[1:total.terms]],
             prot.col[nodes$num[start.entry:total.nodes]])
@@ -2593,7 +2593,7 @@ if (ncol(nodes) == 7) {
   if (total.terms <= 60) {
     print("si hay 60 o menos de 60, se puede hacer complex y simple plots")
     if (total.terms <= 30) {
-      print("Son 30 o menos de 30 categor�as, usar configuraci�n de una barra")
+      print("Son 30 o menos de 30 categor?as, usar configuraci?n de una barra")
       print(paste("el ancho de la figura es:",width.png))
       #
       # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -2640,11 +2640,11 @@ if (ncol(nodes) == 7) {
           scale_x_discrete(limits=rev(for.bar$Entry))+
           geom_text(aes(x=Entry,y=log.pval+.5,label=Freq),size=6.7,fontface ="bold")+ #<---------------------
         #ggtitle("-log(P-value) and\n -log(Corrected P-value)")+
-          theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama�o del titulo sobre el grafico
+          theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama?o del titulo sobre el grafico
                 axis.title.x =element_blank(),# element_text(colour="black",size=27,face="bold",hjust = 0,vjust = 10),
                 axis.title.y = element_blank(),
                 axis.text.y = element_text(colour=c("white",rep("black",30)),size=19,
-                                           face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama�o y color de texto de eje x
+                                           face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama?o y color de texto de eje x
                 axis.text.x = element_text(colour="black",size=19,face="bold",vjust = 0),
                 axis.ticks.length =unit(.2, "cm"), #reduce la longitud de las marcas en la linea de escala de los ejes x y
                 axis.ticks.y.left = element_line(colour = "black",size=3,unit(0, "cm")),
@@ -2939,7 +2939,7 @@ if (ncol(nodes) == 7) {
                          transparency = 0,
                          directional = i,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del c?rculo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -3029,7 +3029,7 @@ if (ncol(nodes) == 7) {
                          transparency = 0,
                          directional = i,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del c?rculo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -3146,7 +3146,7 @@ if (ncol(nodes) == 7) {
                          transparency = 0,
                          directional = i,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del c?rculo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -3248,7 +3248,7 @@ if (ncol(nodes) == 7) {
                          transparency = 0,
                          directional = i,
                          annotationTrack = "grid",
-                         #    c(% del datio del c�rculo, alto del track)
+                         #    c(% del datio del c?rculo, alto del track)
                          annotationTrackHeight = c(0.08, .01),
                          preAllocateTracks = 2)
             circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -3400,12 +3400,12 @@ if (ncol(nodes) == 7) {
       }
       #>
     } else {
-      print("son 31 o m�s de 31, usar la configuraci�n de dos barras")
+      print("son 31 o m?s de 31, usar la configuraci?n de dos barras")
       print(paste("el ancho de la figura es:",width.png))
-      # aqu� usar la nueva configuraci�n para agregar dos barras
+      # aqu? usar la nueva configuraci?n para agregar dos barras
       # controlar el ancho de la figura para esta figura don dos barras
       # >>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-      # aqu� usar la nueva configuraci�n para agregar dos barras
+      # aqu? usar la nueva configuraci?n para agregar dos barras
       # controlar el ancho de la figura para esta figura don dos barras
       # First part of the data
       #
@@ -3444,11 +3444,11 @@ if (ncol(nodes) == 7) {
         scale_x_discrete(limits=rev(for.bar.1_30$Entry))+
         geom_text(aes(x=Entry,y=log.pval+.5,label=Freq),size=6.7,fontface ="bold")+ #<---------------------
       ggtitle("-log(P-value) and\n -log(Corrected P-value)")+
-        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama�o del titulo sobre el grafico
+        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama?o del titulo sobre el grafico
               axis.title.x =element_blank(),# element_text(colour="black",size=27,face="bold",hjust = 0,vjust = 10),
               axis.title.y = element_blank(),
               axis.text.y = element_text(colour=c("white",rep("black",30)),size=19,
-                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama�o y color de texto de eje x
+                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama?o y color de texto de eje x
               axis.text.x = element_text(colour="black",size=19,face="bold",vjust = 0),
               axis.ticks.length =unit(.2, "cm"), #reduce la longitud de las marcas en la linea de escala de los ejes x y
               axis.ticks.y.left = element_line(colour = "black",size=3,unit(0, "cm")),
@@ -3501,11 +3501,11 @@ if (ncol(nodes) == 7) {
         scale_x_discrete(limits=rev(for.bar.31_final$Entry))+
         geom_text(aes(x=Entry,y=log.pval+.5,label=Freq),size=6.7,fontface ="bold")+ #<---------------------
       ggtitle("-log(P-value) and\n -log(Corrected P-value)")+
-        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama�o del titulo sobre el grafico
+        theme(plot.title = element_text(vjust = 4,hjust=.08,size = 20), # element_text(hjust = .1,size = 12,face="bold"),#posocion y tama?o del titulo sobre el grafico
               axis.title.x =element_blank(),# element_text(colour="black",size=27,face="bold",hjust = 0,vjust = 10),
               axis.title.y = element_blank(),
               axis.text.y = element_text(colour=c("white",rep("black",30)),size=19,
-                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama�o y color de texto de eje x
+                                         face="bold",hjust = 1.3,vjust = .5), #element_text(size = 8,color="black"),#tama?o y color de texto de eje x
               axis.text.x = element_text(colour="black",size=19,face="bold",vjust = 0),
               axis.ticks.length =unit(.2, "cm"), #reduce la longitud de las marcas en la linea de escala de los ejes x y
               axis.ticks.y.left = element_line(colour = "black",size=3,unit(0, "cm")),
@@ -3797,7 +3797,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -3887,7 +3887,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -4004,7 +4004,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -4106,7 +4106,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -4259,7 +4259,7 @@ if (ncol(nodes) == 7) {
     #>
     }
   } else {
-    print("hay 61 o m�s de 61, se puede hacer �nicamente plots simples")
+    print("hay 61 o m?s de 61, se puede hacer ?nicamente plots simples")
     print(paste("el ancho de la figura es:",width.png))
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>
     #
@@ -4410,7 +4410,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -4500,7 +4500,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -4617,7 +4617,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
@@ -4719,7 +4719,7 @@ if (ncol(nodes) == 7) {
                        transparency = 0,
                        directional = i,
                        annotationTrack = "grid",
-                       #    c(% del datio del c�rculo, alto del track)
+                       #    c(% del datio del c?rculo, alto del track)
                        annotationTrackHeight = c(0.08, .01),
                        preAllocateTracks = 2)
           circos.track(track.index = 2,ylim = c(0, 1), track.height = uh(5, "cm"),
