@@ -9,6 +9,7 @@ import numpy as np
 import xlsxwriter
 import warnings
 warnings.filterwarnings("ignore")
+import sys
 
 
 ppparametros = open('NeVOmics_params.txt', 'r')
