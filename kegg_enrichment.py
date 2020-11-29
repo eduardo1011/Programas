@@ -305,3 +305,45 @@ for i in list_input.Entry.drop_duplicates().dropna().tolist():
         continue
     else:
         no_anotadas.append(i)
+
+
+reporte = {'base':[np.nan,
+                   'KEGG DB Last-Modified',
+                   'Input file name',
+                   'Association file name',
+                   'Total number of background',
+                   'Total number of list',
+                   'Background with Pathways',
+                   'List input with Pathways',
+                   'Non-singletons value for Bonf_corr',
+                   'Correction Method',
+                   'Value',
+                   np.nan,
+                   'Proteins with no information in KEGG Pathways',
+                   ';'.join(no_anotadas)],
+        'list_count':[np.nan,
+                      infokegg,
+                      file_path, analysis,
+                      background_info['Entry'].drop_duplicates().count(),
+                      list_input['Entry'].drop_duplicates().count(),
+                      background_info['Entry'].drop_duplicates().count(),
+                      list_input_match['Entry'].drop_duplicates().count(),
+                      int(float(results_process_P.Bonf_corr.iloc[-1:]) / float(results_process_P.P.iloc[-1:])),
+                      'FDR',
+                      str(FDR)+' ('+str(FDR * 100)+'%)',
+                      np.nan,
+                      len(no_anotadas),
+                      np.nan]}
+information = DataFrame(reporte)
+informe_final = pd.concat([results_process_P, information], axis=0, sort=False).rename(columns={'base':'Path'})
+
+
+writer = pd.ExcelWriter('Enrichment_Pathways_Analysis_FDR_'+str(FDR)+'.xlsx')
+
+informe_final.to_excel(writer,'Significant KEGG Pathways',index=False)
+
+enrich_P.to_excel(writer,'Enrichment Results',index=False)
+
+edges_frame_excel.to_excel(writer,'Edges Pathways',index=False)
+writer.save()
+
