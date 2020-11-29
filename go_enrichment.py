@@ -7,6 +7,8 @@ import urllib.request
 import subprocess
 import numpy as np
 import xlsxwriter
+import warnings
+warnings.filterwarnings("ignore")
 
 
 ppparametros = open('NeVOmics_params.txt', 'r')
