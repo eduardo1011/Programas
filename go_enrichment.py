@@ -73,17 +73,8 @@ def find(pattern, path):
             if fnmatch.fnmatch(name, pattern):
                 result.append(os.path.join(root, name))
     return result
-
-gobasic = open('../NeVOmics_img/go-basic.obo', 'r')
-for line in gobasic:
-    if re.search('data-version: .*', line):
-        pat = re.search('data-version: .*', line).group()
-        go_version = re.sub('data-version: releases.', '', pat)
-        print('\nOntology version: ', go_version)
-        print('Downloaded from: http://geneontology.org/docs/download-ontology/', '\n')
-        break
         
-with open('../NeVOmics_img/go-basic.obo', 'r') as g:
+with open('../NeVOmics_DataBase/go-basic.obo', 'r') as g:
     go_obo = g.read()
 g.close()
 ontology_file = go_obo.split('[Term]')
@@ -96,37 +87,32 @@ for i in ontology_file[1:len(ontology_file)]:
                  aspect[i.split('\n')[3].split(': ')[1]]])
 ontologia = DataFrame(items, columns = ['GO', 'Term', 'Aspect'])
 
-
-ontologia[ontologia['Aspect'].str.contains('P') == True][['GO','Term']].to_csv('data/GO_BP.txt', sep = '\t', index = None)
-ontologia[ontologia['Aspect'].str.contains('F') == True][['GO','Term']].to_csv('data/GO_MF.txt', sep = '\t', index = None)
-ontologia[ontologia['Aspect'].str.contains('C') == True][['GO','Term']].to_csv('data/GO_CC.txt', sep = '\t', index = None)
-
 ##############################################################
 ################           Uniprot         ###################
 ##############################################################
 
-file_uniprot = find('annotation_'+Prefix, '../')
+file_uniprot = find('../NeVOmics_DataBase/Annotation_'+Prefix, '../')
 if file_uniprot == ('' or []):
-    uni = urllib.request.urlretrieve('https://www.uniprot.org/uniprot/?query=organism:'+Prefix+'&format=tab&columns=id,genes,go-id', 'annotation_'+Prefix)
+    uni = urllib.request.urlretrieve('https://www.uniprot.org/uniprot/?query=organism:'+Prefix+'&format=tab&columns=id,genes,go-id', '../NeVOmics_DataBase/Annotation_'+Prefix)
     prot_version = uni[1]['Last-Modified']
     go_uniptot_version = uni[1]['Last-Modified']
-    print('UniProtKB version: ', prot_version)
-    print('Entries: ', uni[1]['X-Total-Results'])
+    #print('UniProtKB version: ', prot_version)
+    #print('Entries: ', uni[1]['X-Total-Results'])
     with open(uni[0], 'a') as fq:
         fq.write('#'+prot_version)
         fq.close()
     
-    acc_GOid=pd.read_csv('annotation_'+Prefix,sep='\t')#.dropna().reset_index(drop=True)
+    acc_GOid=pd.read_csv('../NeVOmics_DataBase/Annotation_'+Prefix,sep='\t')#.dropna().reset_index(drop=True)
     acc_GOid.columns = ['Entry', 'Gene', 'GO']
 else:
     file_uniprot = re.sub('\\\\', '/', file_uniprot[0])
-    print('It already exists:', file_uniprot)
+    #print('It already exists:', file_uniprot)
     acc_GOid=pd.read_csv(file_uniprot,sep='\t')#.dropna().reset_index(drop=True)
     acc_GOid.columns = ['Entry', 'Gene', 'GO']
     go_uniptot_version = re.sub('#', '', acc_GOid.Entry.tolist()[-1])
-    print('UniProtKB version: ', re.sub('#', '', acc_GOid.Entry.tolist()[-1]))
+    #print('UniProtKB version: ', re.sub('#', '', acc_GOid.Entry.tolist()[-1]))
     acc_GOid = acc_GOid[acc_GOid.Entry.str.contains('#') == False]
-    print('Entries: ', acc_GOid.Entry.count())
+    #print('Entries: ', acc_GOid.Entry.count())
 
 # ## exploracion de la anotacion de Uniprot
 
@@ -193,7 +179,7 @@ def hojas(dict_hoja = dict()):
 
 if anotacion_goa == '1':
 
-    file_goa = ''.join(find('Complete_Annotation_'+Prefix+'_goa', '../'))
+    file_goa = ''.join(find('../NeVOmics_DataBase/Complete_Annotation_'+Prefix+'_goa', '../'))
     file_goa1 = re.sub('\\\\', '/', file_goa)
     file_goa2 = file_goa1.split('/')[-1]
     
@@ -252,8 +238,8 @@ if anotacion_goa == '1':
     
         print('\n')
         complete_annotation = pd.concat(resultado)
-        complete_annotation.to_csv('Complete_Annotation_'+Prefix+'_goa', sep = '\t',index=None)
-        with open('Complete_Annotation_'+Prefix+'_goa', 'a') as fq:
+        complete_annotation.to_csv('../NeVOmics_DataBase/Complete_Annotation_'+Prefix+'_goa', sep = '\t',index=None)
+        with open('../NeVOmics_DataBase/Complete_Annotation_'+Prefix+'_goa', 'a') as fq:
             fq.write('#'+goa_information)
             fq.close()
     else:
@@ -282,7 +268,7 @@ else:
     pass
 
 # descarga el modulo para la estadistica
-hd = urllib.request.urlretrieve('https://raw.githubusercontent.com/bioinfproject/bioinfo/master/Folder/HD.py', './HD.py')
+hd = urllib.request.urlretrieve('https://raw.githubusercontent.com/eduardo1011/Programas/master/HD.py', './HD.py')
 
 #############  funciones
 
