@@ -55,15 +55,19 @@ def hypergeometric(n, p, k, r):
 
 
 # open files
-association=pd.read_csv('data/Association.txt',sep='\t', names = ['Entry', 'base'])
+association=pd.read_csv('data/Association.txt',sep='\t')
+association.columns = ['Entry' , 'base']
 association['Entry'] = [str(i) for i in association.Entry]
 
-description = pd.read_csv('../NeVOmics_DataBase/'+sys.argv[1],sep='\t', names = ['base' , 'Term'])
+description = pd.read_csv('../NeVOmics_DataBase/GO_MF.txt',sep='\t')
+description.columns = ['base' , 'Term']
 
-background = pd.read_csv('data/Background.txt',sep='\t', names = ['Entry'])
+background = pd.read_csv('data/Background.txt',sep='\t')
+background.columns = ['Entry']
 background['Entry'] = [str(i) for i in background.Entry]
 
-List = pd.read_csv('data/List.txt',sep='\t', names = ['Entry'])
+List = pd.read_csv('data/List.txt',sep='\t')
+List.columns = ['Entry']
 List['Entry'] = [str(i) for i in List.Entry]
 
 # Total of proteins with terms in list (for hypergeometric dustribution)
