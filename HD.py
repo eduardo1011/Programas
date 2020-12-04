@@ -59,7 +59,7 @@ association=pd.read_csv('data/Association.txt',sep='\t')
 association.columns = ['Entry' , 'base']
 association['Entry'] = [str(i) for i in association.Entry]
 
-description = pd.read_csv('../NeVOmics_DataBase/GO_MF.txt',sep='\t')
+description = pd.read_csv('../NeVOmics_DataBase/'+sys.argv[1],sep='\t')
 description.columns = ['base' , 'Term']
 
 background = pd.read_csv('data/Background.txt',sep='\t')
