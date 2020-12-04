@@ -1,36 +1,69 @@
 #!/usr/bin/env python
-# coding: utf-8
-
 import sys
-sys.path.append("../NeVOmics_PyMod/")
-
-
-from scipy.stats import hypergeom
-import re
-from pandas import Series, DataFrame 
-import pandas
 import pandas as pd
-import csv
-import shutil, os
-import numpy as np
+import re
+from pandas import DataFrame
+import numpy
 
-#sys.argv[1]='Pathways.txt'
+def lFactorial(val):
+    returnValue = 0
+    i = 2
+    while i <= val:
+        returnValue = returnValue + numpy.log(i)
+        i += 1
+    return returnValue
+def lNchooseK(n, k):
+    answer = 0
+    if k > (n-k):
+        k = n-k
+    i = n
+    while i > (n - k):
+        answer = answer + numpy.log(i)
+        i -= 1
+    answer = answer - lFactorial(k)
+    return answer
+def hypergeometric(n, p, k, r):
+    """
+    extraido del script de perl de GeneMerge
+    n = total poblacion
+    p = parte de la poblacion con un item especifico
+    k = total de la muestra
+    r = parte de la muestra con el mismo item que p
+    n, p, k, r = 6157, 222, 473, 81
+    hypergeometric(n, p, k, r)
+    """
+    np = p
+    nq = n - p
+    p = p/n
+    log_n_choose_k = lNchooseK(n, k)
+    
+    top = k
+    if np < k:
+        top = np
+    lfoo = lNchooseK(np, top) + lNchooseK(n*(1-p), k-top)
+    suma = 0
+    i = top
+    while i >= r:
+        suma = suma + numpy.exp(lfoo - log_n_choose_k)
+        if i > r:
+            lfoo = lfoo + numpy.log(i / (np-i+1)) +  numpy.log((nq - k + i) / (k-i+1))
+        i -= 1
+    if suma > 1:
+        suma = 1
+    return suma
+
 
 
 # open files
-association=pd.read_csv('data/Association.txt',sep='\t')
-association.columns = ['Entry' , 'base']
+association=pd.read_csv('data/Association.txt',sep='\t', names = ['Entry', 'base'])
 association['Entry'] = [str(i) for i in association.Entry]
 
-description = pd.read_csv('../NeVOmics_DataBase/'+sys.argv[1],sep='\t')
-description.columns = ['base' , 'Term']
+description = pd.read_csv('../NeVOmics_DataBase/'+sys.argv[1],sep='\t', names = ['base' , 'Term'])
 
-background = pd.read_csv('data/Background.txt',sep='\t')
-background.columns = ['Entry']
+background = pd.read_csv('data/Background.txt',sep='\t', names = ['Entry'])
 background['Entry'] = [str(i) for i in background.Entry]
 
-List = pd.read_csv('data/List.txt',sep='\t')
-List.columns = ['Entry']
+List = pd.read_csv('data/List.txt',sep='\t', names = ['Entry'])
 List['Entry'] = [str(i) for i in List.Entry]
 
 # Total of proteins with terms in list (for hypergeometric dustribution)
@@ -81,7 +114,9 @@ statistics['tot_back']=total_proteins_bg
 ## Loop for calculate hypergeometric distribution
 p_val=[]
 for index, row in statistics.iterrows():
-    b=hypergeom.sf(row['list_count']-1, total_proteins_bg, row['back_count'], total_protein_list, loc=0)
+    # from scipy.stats import hypergeom
+    #b=hypergeom.sf(row['list_count']-1, total_proteins_bg, row['back_count'], total_protein_list, loc=0)
+    b = hypergeometric(total_proteins_bg, row['back_count'], total_protein_list, row['list_count'])
     p_val.append(b)
 statistics['P'] = p_val
 
