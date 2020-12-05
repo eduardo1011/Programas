@@ -15,7 +15,7 @@ ppparametros = open('NeVOmics_params.txt', 'r')
 parametros = ppparametros.read()
 ppparametros.close()
 
-han = open('../NeVOmics_img/KEGG_Organisms.txt', 'r')
+han = open('../NeVOmics_DataBase/KEGG_Organisms.txt', 'r')
 dict_org = {}
 for line in han:
     line = line.rstrip()
